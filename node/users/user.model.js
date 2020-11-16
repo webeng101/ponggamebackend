@@ -9,9 +9,9 @@ function model(sequelize) {
         username: { type: DataTypes.STRING, allowNull: false },
         email: { type: DataTypes.STRING, allowNull: false },
         hash: { type: DataTypes.STRING, allowNull: false },
-        score: { type: DataTypes.INTEGER, allowNull: false, default:0},
-        highScore: { type: DataTypes.INTEGER, allowNull: false, default:0 },
-        birthday: { type: DataTypes.DATE, allowNull: false, default: Date.now},
+        score: { type: DataTypes.INTEGER, allowNull: true, default:0},
+        highScore: { type: DataTypes.INTEGER, allowNull: true, default:0 },
+        birthday: { type: DataTypes.DATE, allowNull: true, default: Date.now},
     };
 
     const options = {
