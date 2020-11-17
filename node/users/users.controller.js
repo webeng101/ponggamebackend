@@ -83,11 +83,10 @@ function updateSchema(req, res, next) {
 }
 
 function update(req, res, next) {
-    if(req.body.score >= req.body.highScore){
         userService.update(req.params.id, req.body)
             .then(user => res.json(user))
             .catch(next);
-    }
+    
 }
 
 function _delete(req, res, next) {
