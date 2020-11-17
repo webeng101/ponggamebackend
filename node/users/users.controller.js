@@ -35,7 +35,10 @@ function registerSchema(req, res, next) {
     const date22YearsAgo = new Date(Date.now() - 1000 * 60 * 60 * 24 * 365 * 22);
     // try to validate the age larger than or equal to 18 years old
     const ageSchema = Joi.date().max(date22YearsAgo);
-    ageSchema.validate(req.body.birthday);
+    const { error, value } = ageSchema.validate(req.body.birthday);
+    if (error) {
+        next(`Validation error: ${error.details.map(x => x.message).join(', ')}`);
+    }
     const schema = Joi.object({
         username: Joi.string().required(),
         email: Joi.string().required(),
