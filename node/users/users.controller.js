@@ -83,10 +83,10 @@ function updateSchema(req, res, next) {
 }
 
 function update(req, res, next) {
-        userService.update(req.params.id, req.body)
-            .then(user => res.json(user))
-            .catch(next);
-    
+    userService.update(req.params.id, req.body)
+        .then(user => res.json(user))
+        .catch(next);
+
 }
 
 function _delete(req, res, next) {
