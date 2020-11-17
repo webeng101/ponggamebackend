@@ -3,7 +3,7 @@ const router = express.Router();
 const Joi = require('joi');
 const customJoi = Joi.extend(require("joi-age"));
 const validateRequest = require('_middleware/validate-request');
-const authorize = require('_middleware/authorize')
+const authorize = require('_middleware/authorize');
 const userService = require('./user.service');
 
 // routes
