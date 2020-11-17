@@ -75,15 +75,19 @@ function updateSchema(req, res, next) {
         firstName: Joi.string().empty(''),
         lastName: Joi.string().empty(''),
         username: Joi.string().empty(''),
+        score : Joi.number().empty('').default(0),
+        highScore:Joi.number().empty('').default(0),
         password: Joi.string().min(6).empty('')
     });
     validateRequest(req, next, schema);
 }
 
 function update(req, res, next) {
-    userService.update(req.params.id, req.body)
-        .then(user => res.json(user))
-        .catch(next);
+    if(req.body.score >= req.body.highScore){
+        userService.update(req.params.id, req.body)
+            .then(user => res.json(user))
+            .catch(next);
+    }
 }
 
 function _delete(req, res, next) {
