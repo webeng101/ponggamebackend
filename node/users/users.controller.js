@@ -1,9 +1,8 @@
 ﻿const express = require('express');
 const router = express.Router();
 const Joi = require('joi');
-const customJoi = Joi.extend(require("joi-age"));
 const validateRequest = require('_middleware/validate-request');
-const authorize = require('_middleware/authorize');
+const authorize = require('_middleware/authorize')
 const userService = require('./user.service');
 
 // routes
@@ -33,12 +32,15 @@ function authenticate(req, res, next) {
 }
 
 function registerSchema(req, res, next) {
+    const date22YearsAgo = new Date(Date.now() - 1000 * 60 * 60 * 24 * 365 * 22);
+    // try to validate the age larger than or equal to 18 years old
+    const ageSchema = Joi.date().max(date22YearsAgo);
+    ageSchema.validate(req.body.birthday);
     const schema = Joi.object({
         username: Joi.string().required(),
         email: Joi.string().required(),
         password: Joi.string().min(6).required(),
-        confirmPassword: Joi.string().valid(Joi.ref('password')).required(),
-        birthday: customJoi.date().minAge(22)
+        confirmPassword: Joi.string().valid(Joi.ref('password')).required()
     });
     validateRequest(req, next, schema);
 }
