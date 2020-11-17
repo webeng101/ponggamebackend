@@ -33,12 +33,11 @@ function authenticate(req, res, next) {
 
 function registerSchema(req, res, next) {
     const schema = Joi.object({
-        firstName: Joi.string().required(),
-        lastName: Joi.string().required(),
         username: Joi.string().required(),
         email: Joi.string().required(),
         password: Joi.string().min(6).required(),
         confirmPassword: Joi.string().valid(Joi.ref('password')).required(),
+        birthday: Joi.date().minAge(22)
     });
     validateRequest(req, next, schema);
 }
