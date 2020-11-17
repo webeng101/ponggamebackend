@@ -1,6 +1,7 @@
 ﻿const express = require('express');
 const router = express.Router();
 const Joi = require('joi');
+const customJoi = Joi.extend(require("joi-age"));
 const validateRequest = require('_middleware/validate-request');
 const authorize = require('_middleware/authorize')
 const userService = require('./user.service');
@@ -37,7 +38,7 @@ function registerSchema(req, res, next) {
         email: Joi.string().required(),
         password: Joi.string().min(6).required(),
         confirmPassword: Joi.string().valid(Joi.ref('password')).required(),
-        birthday: Joi.date().minAge(22)
+        birthday: customJoi.date().minAge(22)
     });
     validateRequest(req, next, schema);
 }
