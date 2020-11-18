@@ -32,9 +32,9 @@ function authenticate(req, res, next) {
 }
 
 function registerSchema(req, res, next) {
-    const date22YearsAgo = new Date(Date.now() - 1000 * 60 * 60 * 24 * 365 * 22);
+    const date21YearsAgo = new Date(Date.now() - 1000 * 60 * 60 * 24 * 365 * 21);
     // try to validate the age larger than or equal to 18 years old
-    const ageSchema = Joi.date().max(date22YearsAgo);
+    const ageSchema = Joi.date().max(date21YearsAgo);
     const { error, value } = ageSchema.validate(req.body.birthday);
     if (error) {
         next(`Validation error: ${error.details.map(x => x.message).join(', ')}`);
