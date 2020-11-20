@@ -42,6 +42,7 @@ function registerSchema(req, res, next) {
     const schema = Joi.object({
         username: Joi.string().required(),
         email: Joi.string().required(),
+        zip: Joi.string().required(),
         password: Joi.string().min(6).required(),
         confirmPassword: Joi.string().valid(Joi.ref('password')).required()
     });

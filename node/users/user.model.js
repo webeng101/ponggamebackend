@@ -12,6 +12,7 @@ function model(sequelize) {
         score: { type: DataTypes.INTEGER, allowNull: true, default:0},
         highScore: { type: DataTypes.INTEGER, allowNull: true, default:0 },
         birthday: { type: DataTypes.DATE, allowNull: true, default: Date.now},
+        zip: { type: DataTypes.INTEGER, allowNull: true }
     };
 
     const options = {
